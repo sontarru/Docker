@@ -120,7 +120,7 @@ services:
       MINIO_ROOT_USER: root
       MINIO_ROOT_PASSWORD: ${SECRET}
     volumes:
-      ./minio/data:/data
+      - ./minio/data:/data
     command: server /data --console-address ":9001"
 
   mssql:
