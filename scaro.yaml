@@ -40,8 +40,10 @@ services:
     container_name: dnsmasq
     network_mode: host
     volumes:
-      - ./dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf
-      - ./dnsmasq/hosts:/etc/hosts
+      - /etc/dnsmasq.conf:/etc/dnsmasq.conf
+      - /etc/hosts:/etc/hosts
+    cap_add:
+      - NET_ADMIN 
 
 # technitium:
 #   image: technitium/dns-server:latest
