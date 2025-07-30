@@ -34,16 +34,16 @@ services:
       - ./transmission/downloads:/downloads
       - ./transmission/watch:/watch
 
-  dnsmasq:
-    image: ghcr.io/sontarru/dnsmasq:latest
-    restart: unless-stopped
-    container_name: dnsmasq
-    network_mode: host
-    volumes:
-      - /etc/dnsmasq.conf:/etc/dnsmasq.conf
-      - /etc/hosts:/etc/hosts
-    cap_add:
-      - NET_ADMIN
+# dnsmasq:
+#   image: ghcr.io/sontarru/dnsmasq:latest
+#   restart: unless-stopped
+#   container_name: dnsmasq
+#   network_mode: host
+#   volumes:
+#     - /etc/dnsmasq.conf:/etc/dnsmasq.conf
+#     - /etc/hosts:/etc/hosts
+#   cap_add:
+#     - NET_ADMIN
 
   dns:
     image: technitium/dns-server:latest
@@ -86,3 +86,12 @@ services:
       # - DNS_SERVER_LOG_USING_LOCAL_TIME=true #Enable this option to use local time instead of UTC for logging.
     volumes:
       - ./dns:/etc/dns
+
+  tinyproxy:
+    image: ghcr.io/sontarru/tinyproxy:latest
+    restart: unless-stopped
+    container_name: tinyproxy
+    network_mode: "host"
+    volumes:
+      - ./tinyproxy:/etc/tinyproxy
+
