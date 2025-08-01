@@ -139,4 +139,3 @@ services:
     container_name: registry
     ports:
       - "5000:5000"
-

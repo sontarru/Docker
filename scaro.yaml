@@ -1,5 +1,6 @@
 services:
 
+  # https://hub.docker.com/r/jellyfin/jellyfin
   jellyfin:
     image: jellyfin/jellyfin:latest
     restart: 'unless-stopped'
@@ -11,6 +12,7 @@ services:
       - ./jellyfin/cache:/cache
       - ./jellyfin/media:/media
 
+  # https://hub.docker.com/r/linuxserver/transmission
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     restart: unless-stopped
@@ -18,41 +20,20 @@ services:
     environment:
       PUID: 1000
       PGID: 1000
-      TZ: Europe/Moscow
-      # - TRANSMISSION_WEB_HOME= #optional
-      # - USER: rnovo
-      # - PASS= #optional
-      # - WHITELIST= #optional
-      # - PEERPORT= #optional
-      # - HOST_WHITELIST= #optional
     ports:
-      - "9091:9091"
-      - "51413:51413"
-      - "51413:51413/udp"
+      - "9091:9091/tcp"
     volumes:
       - ./transmission/config:/config
       - ./transmission/downloads:/downloads
       - ./transmission/watch:/watch
 
-# dnsmasq:
-#   image: ghcr.io/sontarru/dnsmasq:latest
-#   restart: unless-stopped
-#   container_name: dnsmasq
-#   network_mode: host
-#   volumes:
-#     - /etc/dnsmasq.conf:/etc/dnsmasq.conf
-#     - /etc/hosts:/etc/hosts
-#   cap_add:
-#     - NET_ADMIN
-
+  # https://hub.docker.com/r/technitium/dns-server
   dns:
     image: technitium/dns-server:latest
     restart: unless-stopped
     container_name: dns
-    # For DHCP deployments, use "host" network mode and remove all the port mappings, including the ports array by commenting them
     network_mode: "host"
     environment:
-      DNS_SERVER_ADMIN_PASSWORD: ${SECRET} #DNS web console admin user password.
+      DNS_SERVER_ADMIN_PASSWORD: ${SECRET}
     volumes:
       - ./dns:/etc/dns
-
