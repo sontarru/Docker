@@ -33,7 +33,7 @@ services:
       PUID: 1003
       PGID: 1003
     ports:
-      - "9091:9091/tcp"
+      - "10.42.0.1:9091:9091/tcp"
     volumes:
       - ./transmission/config:/config
       - ./transmission/downloads:/downloads
