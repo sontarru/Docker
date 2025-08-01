@@ -5,7 +5,6 @@ services:
     image: technitium/dns-server:latest
     restart: unless-stopped
     container_name: dns
-    user: 1001:1001
     network_mode: "host"
     environment:
       DNS_SERVER_ADMIN_PASSWORD: ${SECRET}
