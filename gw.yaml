@@ -44,9 +44,7 @@ services:
     image: vimagick/dante:latest
     restart: unless-stopped
     container_name: dante
-    user: 1004:1004
-    ports:
-    - "1080:1080"
+    network_mode: "host"
     volumes:
     - ./dante:/etc/dante
 
