@@ -5,9 +5,10 @@ services:
     image: technitium/dns-server:latest
     restart: unless-stopped
     container_name: dns
+    user: 1001:1001
     ports:
-      - "53:53/udp"
-      - "53:53/tcp"
+      - "185.250.180.162:53:53/udp"
+      - "185.250.180.162:53:53/tcp"
       - "10.8.0.1:5380:5380/tcp"
     environment:
       DNS_SERVER_ADMIN_PASSWORD: ${SECRET}
