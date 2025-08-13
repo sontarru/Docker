@@ -60,3 +60,12 @@ services:
     ports:
     - "10.42.0.1:8080:8080/tcp"
 
+  dnsmasq:
+    image: ghcr.io/sontarru/dnsmasq:latest
+    restart: unless-stopped
+    container_name: dnsmasq
+    # The `host` network mode is required for DHCP
+    network_mode: host
+    volumes:
+    - ./dnsmasq:/etc/dnsmasq.d
+    - /etc/hosts:/etc/hosts
