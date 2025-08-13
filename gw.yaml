@@ -30,11 +30,12 @@ services:
     image: lscr.io/linuxserver/transmission:latest
     restart: unless-stopped
     container_name: transmission
+    network_mode: host
     environment:
       PUID: 1003
       PGID: 1003
-    ports:
-    - "10.42.0.1:9091:9091/tcp"
+    #ports:
+    #- "10.42.0.1:9091:9091/tcp"
     volumes:
     - ./transmission/config:/config
     - ./transmission/downloads:/downloads
